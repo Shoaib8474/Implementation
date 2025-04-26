@@ -19,7 +19,7 @@ function rotateArr(arr, d) {
 let arr = [1, 2, 3, 4, 5, 6];
 let d = 9; // towards left by d positions
 rotateArr(arr, d);
-console.log(arr.join(" "));
+// console.log(arr.join(" "));
 //Expected Output
 //Output: {3, 4, 5, 6, 1, 2}
 //Explanation: After first left rotation, arr[] becomes {2, 3, 4, 5, 6, 1}
@@ -54,5 +54,33 @@ function rotateArr1(arr, k) {
 let arr1 = [1, 2, 3, 4, 5, 6];
 let k = 2;
 rotateArr1(arr1, k);
-console.log(arr1.join(" "));
+// console.log(arr1.join(" "));
 //Expected Output: { 3 4 5 6 1 2 }
+
+
+//Expected Approach] Using Reversal Algorithm – O(n) Time and O(1) Space
+function reverseArr2(arr, c) {
+    let n = arr.length
+    c %= n;
+
+    reverse(arr, 0, c - 1);
+    reverse(arr, c, n - 1);
+    reverse(arr, 0, n - 1);
+}
+
+function reverse(arr, start, end) {
+    while(start < end) {
+        [arr[start], arr[end]] = [arr[end], arr[start]];
+        start++;
+        end--;
+    }
+}
+
+let arr2 = [1, 2, 3, 4, 5, 6];
+let c = 2;
+reverseArr2(arr2, c)
+console.log(arr2.join(" "));
+//Expected Output: { 3 4 5 6 1 2 }
+//Reverse the subarray containing the first d elements of the array. { 2, 1,  3, 4, 5, 6}
+//Reverse the subarray containing the last (n – d) elements of the array. {2, 1,  6, 5, 4, 3}
+//Finally, reverse all the elements of the array. { 3 4 5 6 1 2 }
