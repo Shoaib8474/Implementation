@@ -1,9 +1,11 @@
+//Find maximum (or minimum) sum of a subarray of size k by brute force. 
+// The time complexity of this solution is O(n*k).
 function subArray(arr, k) {
     let n = arr.length;
     let max = -Infinity;
-    for (let i = 0; i <= n-k; i++) {
+    for (let i = 0; i <= n - k; i++) {
         let current = 0
-        for (let j = i; j < i+k; j++) {
+        for (let j = i; j < i + k; j++) {
             current += arr[j];
         }
         max = Math.max(max, current);
@@ -15,6 +17,8 @@ let arr = [3, 4, 7, 1, 8, 5, 1];
 let size = 3
 console.log(subArray(arr, size));
 //Expected Output: 16
+//Time Complexity: O(n2)
+//Auxiliary Space: O(1)
 
 
 // Sliding Window Technique. This approach is efficient and works in O(n) time complexity.
