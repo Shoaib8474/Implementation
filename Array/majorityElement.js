@@ -40,30 +40,39 @@ console.log(majorityElement(arr));
 
 // Function to find Majority element in an array
 // it returns -1 if there is no majority element
-function majorityElement(arr) {
-    let n = arr.length;
+function findMajorityElement(arr) {
+    // Step 1: Sort the array
     arr.sort((a, b) => a - b);
 
-    let candidate = arr[Math.floor(n / 2)];
+    let count = 1;
+    let majorityElement = null;
+    let n = arr.length;
 
-    let count = 0;
-    for (let num of arr) {
-        if (num === candidate) {
+    for (let i = 1; i < n; i++) {
+        if (arr[i] === arr[i - 1]) {
             count++;
+        } else {
+            // Step 3 & 4: Check if previous element's count exceeds half of total elements
+            if (count > n / 2) {
+                majorityElement = arr[i - 1];
+                break;
+            }
+            count = 1; // Reset count for new element
         }
     }
 
-    if (count > Math.floor(n / 2)) {
-        return candidate;
-    } else {
-        return -1;
+    // Check last element after loop
+    if (count > n / 2) {
+        majorityElement = arr[n - 1];
     }
+
+    return majorityElement !== null ? majorityElement : "No majority element found";
 }
 
+// Example usage:
+let arr1 = [3, 3, 4, 2, 4, 4, 2, 4, 4];
+console.log(findMajorityElement(arr1)); // Output: 4
 
-// Driver Code 
-let arr1 = [1, 1, 2, 1, 3, 5, 1];
-console.log(majorityElement(arr1));
 
 
 // Javascript program to find Majority
@@ -93,7 +102,7 @@ function majorityElement(arr) {
 const arr2 = [1, 1, 2, 1, 3, 5, 1];
 console.log(majorityElement(arr2));
 
-// Moore algorithm`
+//Using Moore’s Voting Algorithm- O(n) Time and O(1) Space
 function findMajorityElement(nums) {
     // First phase: Find a candidate
     let count = 0;
