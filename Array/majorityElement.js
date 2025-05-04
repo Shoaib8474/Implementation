@@ -92,3 +92,32 @@ function majorityElement(arr) {
 // Driver Code
 const arr2 = [1, 1, 2, 1, 3, 5, 1];
 console.log(majorityElement(arr2));
+
+// Moore algorithm`
+function findMajorityElement(nums) {
+    // First phase: Find a candidate
+    let count = 0;
+    let candidate = null;
+    
+    for (const num of nums) {
+        if (count === 0) {
+            candidate = num;
+        }
+        count += (num === candidate) ? 1 : -1;
+    }
+    
+    // Second phase: Verify the candidate
+    count = 0;
+    for (const num of nums) {
+        if (num === candidate) {
+            count++;
+        }
+    }
+    
+    return count > nums.length / 2 ? candidate : null;
+}
+
+// Example usage
+const array = [2, 2, 1, 1, 1, 2, 2];
+const majorityElement = findMajorityElement(array);
+console.log("Majority element is:", majorityElement); // Output: 2
